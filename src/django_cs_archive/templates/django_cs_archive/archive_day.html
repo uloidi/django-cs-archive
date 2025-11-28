@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="archive-day">
+    <h1>{{ day|date:"F d, Y" }}</h1>
+
+    <div class="archive-list">
+        <ul>
+            {% for object in object_list %}
+                <li>
+                    <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+                </li>
+            {% empty %}
+                <li>Ez dago edukirik egun honetan.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="archive-nav">
+        <a href="{% url 'django_cs_archive:month' year=day|date:'Y' month=day|date:'m' %}">Hilabeteko Ikuspegira Itzuli</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="archive-year">
+    <h1>{{ year|date:"Y" }} Artxiboa</h1>
+
+    <div class="archive-list">
+        <ul>
+            {% for object in object_list %}
+                <li>
+                    <span class="date">{{ object.publish_date|date:"M d" }}:</span>
+                    <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+                </li>
+            {% empty %}
+                <li>Ez dago edukirik urte honetan.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="archive-nav">
+        {% if previous_year %}
+            <a href="{% url 'django_cs_archive:year' year=previous_year|date:'Y' %}">&larr; {{ previous_year|date:"Y" }}</a>
+        {% endif %}
+        
+        {% if next_year %}
+            <a href="{% url 'django_cs_archive:year' year=next_year|date:'Y' %}">{{ next_year|date:"Y" }} &rarr;</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

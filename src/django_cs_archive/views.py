@@ -27,7 +27,3 @@ class ArchiveMonthView(DynamicArchiveMixin, MonthArchiveView):
 
 class ArchiveDayView(DynamicArchiveMixin, DayArchiveView):
     pass
-
-class ArchiveDetailView(DynamicArchiveMixin, DateDetailView):
-    # DetailView-k 'slug' eremua behar du URLan, normalean 'slug' izenekoa
-    slug_url_kwarg = 'slug'
