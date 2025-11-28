@@ -1,30 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="archive-year">
-    <h1>{{ year|date:"Y" }} Artxiboa</h1>
+<h1>{{ year|date:"Y" }} Archive</h1>
+<p>Select month:</p>
 
-    <div class="archive-list">
-        <ul>
-            {% for object in object_list %}
-                <li>
-                    <span class="date">{{ object.publish_date|date:"M d" }}:</span>
-                    <a href="{{ object.get_absolute_url }}">{{ object }}</a>
-                </li>
-            {% empty %}
-                <li>Ez dago edukirik urte honetan.</li>
-            {% endfor %}
-        </ul>
-    </div>
-
-    <div class="archive-nav">
-        {% if previous_year %}
-            <a href="{% url 'django_cs_archive:year' year=previous_year|date:'Y' %}">&larr; {{ previous_year|date:"Y" }}</a>
-        {% endif %}
-        
-        {% if next_year %}
-            <a href="{% url 'django_cs_archive:year' year=next_year|date:'Y' %}">{{ next_year|date:"Y" }} &rarr;</a>
-        {% endif %}
-    </div>
+<div class="month-list">
+    <ul>
+        <!-- date_list-ek HILABETEAK ditu hemen -->
+        {% for month_date in date_list %}
+            <li>
+                <a href="{% url 'django_cs_archive:month' year=year|date:'Y' month=month_date|date:'m' %}">
+                    {{ month_date|date:"m" }} <!-- Urtarrila, Otsaila... -->
+                </a>
+            </li>
+        {% empty %}
+            <li>No data this year.</li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}

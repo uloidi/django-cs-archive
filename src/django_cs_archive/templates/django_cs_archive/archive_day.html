@@ -11,13 +11,13 @@
                     <a href="{{ object.get_absolute_url }}">{{ object }}</a>
                 </li>
             {% empty %}
-                <li>Ez dago edukirik egun honetan.</li>
+                <li>No data for this day.</li>
             {% endfor %}
         </ul>
     </div>
 
     <div class="archive-nav">
-        <a href="{% url 'django_cs_archive:month' year=day|date:'Y' month=day|date:'m' %}">Hilabeteko Ikuspegira Itzuli</a>
+        <a href="{% url 'cs_archive:month' year=day|date:'Y' month=day|date:'m' %}">Monthly view</a>
     </div>
 </div>
 {% endblock %}

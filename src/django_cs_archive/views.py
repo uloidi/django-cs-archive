@@ -1,13 +1,10 @@
-# src/nyt_archive/views.py
 from django.views.generic.dates import (
-    YearArchiveView, MonthArchiveView, DayArchiveView, DateDetailView
+    ArchiveIndexView, YearArchiveView, MonthArchiveView, 
+    DayArchiveView, DateDetailView
 )
 from .utils import get_archive_model, get_date_field
 
 class DynamicArchiveMixin:
-    """
-    Mixin honek kudeatzen du konfigurazio dinamikoa settings-etik.
-    """
     make_object_list = True
     allow_future = False
     month_format = '%m'
@@ -19,11 +16,19 @@ class DynamicArchiveMixin:
     def get_date_field(self):
         return get_date_field()
 
-class ArchiveYearView(DynamicArchiveMixin, YearArchiveView):
-    pass
+# 1. BISTA BERRIA: Urteak zerrendatzeko (/archive/)
+class ArchiveMainView(DynamicArchiveMixin, ArchiveIndexView):
+    date_list_period = 'year'  # Honek urteak aterako ditu 'date_list' aldagaian
+    template_name = "django_cs_archive/archive_index.html"
 
+# 2. URTE BISTA: Hilabeteak zerrendatzeko (/archive/2025/)
+class ArchiveYearView(DynamicArchiveMixin, YearArchiveView):
+    make_object_list = True # Artikuluak ere eskuragarri egongo dira, baina txantiloian hilabeteak erakutsiko ditugu
+    template_name = "django_cs_archive/archive_year.html"
+
+# 3. HILABETE BISTA: Artikuluak zerrendatzeko (/archive/2025/03/)
 class ArchiveMonthView(DynamicArchiveMixin, MonthArchiveView):
-    pass
+    template_name = "django_cs_archive/archive_month.html"
 
 class ArchiveDayView(DynamicArchiveMixin, DayArchiveView):
-    pass
+    template_name = "django_cs_archive/archive_day.html"
