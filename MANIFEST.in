@@ -1,0 +1,3 @@
+include README.md
+include LICENSE
+recursive-include src/django_cs_archive/templates *
