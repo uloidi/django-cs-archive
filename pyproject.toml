@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "django-cs-archive"
+version = "0.1.0"
+description = "Django aplikazioetarako New York Times estiloko data-artxibo sistema konfiguragarria."
+readme = "README.md"
+requires-python = ">=3.7"
+license = {file = "LICENSE"}
+authors = [
+  {name = "Zure Izena", email = "zure@emaila.com"},
+]
+keywords = ["django", "archive", "date-views", "nyt", "news"]
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Django",
+    "Framework :: Django :: 3.2",
+    "Framework :: Django :: 4.0",
+    "Framework :: Django :: 4.1",
+    "Framework :: Django :: 4.2",
+    "Framework :: Django :: 5.0",
+    "Intended Audience :: Developers",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+# Zure baldintza nagusia hemen dago:
+dependencies = [
+    "Django>=3.2",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/zure-erabiltzailea/django-cs-archive"
+"Bug Tracker" = "https://github.com/zure-erabiltzailea/django-cs-archive/issues"
