@@ -4,13 +4,13 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "django-cs-archive"
-version = "0.1.0"
+version = "1.0.0"
 description = "Django aplikazioetarako New York Times estiloko data-artxibo sistema konfiguragarria."
 readme = "README.md"
 requires-python = ">=3.7"
 license = {file = "LICENSE"}
 authors = [
-  {name = "Zure Izena", email = "zure@emaila.com"},
+  {name = "Unai Loidi", email = "uloidi@codesyntax.com"},
 ]
 keywords = ["django", "archive", "date-views", "nyt", "news"]
 classifiers = [
@@ -39,5 +39,8 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/zure-erabiltzailea/django-cs-archive"
-"Bug Tracker" = "https://github.com/zure-erabiltzailea/django-cs-archive/issues"
+"Homepage" = "https://github.com/uloidi/django-cs-archive"
+"Bug Tracker" = "https://github.com/uloidi/django-cs-archive/issues"
+
+[tool.setuptools]
+include-package-data = true

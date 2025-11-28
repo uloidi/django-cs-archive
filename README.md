@@ -1,12 +1,12 @@
 # django-cs-archive
 
-A New York Times-style date-based archiving system (YYYY/MM/DD) for Django applications.
+A date-based archiving system (YYYY/MM/DD) for Django applications.
 
 This package wraps Django's powerful generic date views into a plug-and-play solution. It follows the "Convention over Configuration" philosophy: just add a few lines to your `settings.py`, and you're ready to go.
 
 ## Features
 
-* 📅 **Full Hierarchy:** Year, Month, Day, and Detail (Slug) views.
+* 📅 **Full Hierarchy:** Year, Month, and Day views.
 * ⚙️ **Centralized Configuration:** Managed via `settings.py`, similar to `AUTH_USER_MODEL`.
 * 🔌 **Plug-and-play:** No need to write complex views or URL patterns manually.
 * 🐍 **Compatibility:** Supports Django 3.2+.
@@ -51,7 +51,7 @@ from django.urls import path, include
 
 urlpatterns = [
     # ...
-    path('news/', include('django_cs_archive.urls')),
+    path('archive/', include('django_cs_archive.urls')),
 ]
 ```
 
@@ -87,26 +87,16 @@ class Article(models.Model):
 
 Once configured, the following URLs will be automatically available (assuming you used the `news/` prefix):
 
-* `/news/2024/` -> All articles from 2024.
-* `/news/2024/03/` -> All articles from March 2024.
-* `/news/2024/03/15/` -> All articles from that specific day.
-* `/news/2024/03/15/my-article-slug/` -> The full article detail view.
+* `/archive/` -> The year list.
+* `/archive/2024/` -> All months with articles from 2024.
+* `/archive/2024/03/` -> All days with articles March 2024.
+* `/archive/2024/03/15/` -> All articles from that specific day.
 
-### In Templates
 
-Use the `django_cs_archive` namespace to generate links:
-
-```html
-<!-- Link to a specific article -->
-<a href="{{ article.get_absolute_url }}">Read more</a>
-
-<!-- Link to the yearly archive -->
-<a href="{% url 'django_cs_archive:year' year=2024 %}">2024 Archive</a>
-```
 
 ## Customization (Templates)
 
-The package looks for standard Django templates. To customize the look and feel, create the following files in your project's templates directory:
+The package has templates that extend your "base.html" file and uses the {% block content %} block to show the content. To customize the look and feel, create the following files in your project's templates directory:
 
 * `templates/django_cs_archive/archive_year.html`
 * `templates/django_cs_archive/archive_month.html`

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Archive</h1>
+<p>Select a year:</p>
+
+<ul>
+    <!-- date_list-ek urteak ditu hemen -->
+    {% for year_date in date_list %}
+        <li>
+            <a href="{% url 'django_cs_archive:year' year=year_date|date:'Y' %}">
+                {{ year_date|date:"Y" }}
+            </a>
+        </li>
+    {% empty %}
+        <li>No data in the archive.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

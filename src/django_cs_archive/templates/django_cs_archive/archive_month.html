@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ month|date:"F Y" }}</h1>
+
+<ul>
+    {% for object in object_list %}
+        <li>
+            <span class="date">{{ object.publish_date|date:"d" }}:</span>
+            <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
+        </li>
+    {% empty %}
+        <li>No data this month.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
