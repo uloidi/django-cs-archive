@@ -1,6 +1,6 @@
 from django.views.generic.dates import (
     ArchiveIndexView, YearArchiveView, MonthArchiveView, 
-    DayArchiveView, DateDetailView
+    DayArchiveView, DateDetailView, TodayArchiveView
 )
 from .utils import get_archive_model, get_date_field
 from django.utils import timezone
@@ -33,30 +33,27 @@ class ArchiveMonthView(DynamicArchiveMixin, MonthArchiveView):
 class ArchiveDayView(DynamicArchiveMixin, DayArchiveView):
     template_name = "django_cs_archive/archive_day.html"
 
-class ArchiveTodayView(DynamicArchiveMixin, DayArchiveView):
-    template_name = "django_cs_archive/archive_day.html"
+class ArchiveTodayView(DynamicArchiveMixin, TodayArchiveView):
+    template_name = "django_cs_archive/archive_today.html"
+    allow_empty = True
 
-    def get_dated_items(self):
-        # Gaurko datako artikuluak soilik itzuli
-        today = timezone.now().date()
-        date_field = self.get_date_field()
-        filter_kwargs = {
-            f"{date_field}__year": today.year,
-            f"{date_field}__month": today.month,
-            f"{date_field}__day": today.day,
-        }
-        return self.get_queryset().filter(**filter_kwargs)
 class ArchiveThisWeekView(DynamicArchiveMixin, ArchiveIndexView):
     template_name = "django_cs_archive/archive_this_week.html"
-
-    def get_dated_items(self):
-        # Aste honetako artikuluak soilik itzuli
+    date_list_period = 'week'
+    def get_queryset(self):
+        # Lehenik Mixin-eko queryset-a lortu
+        qs = super().get_queryset()
+        
+        # Datak kalkulatu
         today = timezone.now().date()
         start_of_week = today - timezone.timedelta(days=today.weekday())
         end_of_week = start_of_week + timezone.timedelta(days=6)
+        
         date_field = self.get_date_field()
+        
+        # Hemen iragazten dugu QuerySet-a ZUZENEAN
         filter_kwargs = {
             f"{date_field}__date__gte": start_of_week,
             f"{date_field}__date__lte": end_of_week,
         }
-        return self.get_queryset().filter(**filter_kwargs)
+        return qs.filter(**filter_kwargs)

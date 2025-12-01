@@ -4,13 +4,18 @@
 <h1>{{ month|date:"F Y" }}</h1>
 
 <ul>
-    {% for object in object_list %}
-        <li>
-            <span class="date">{{ object.publish_date|date:"d" }}:</span>
-            <a href="{{ object.get_absolute_url }}">{{ object.title }}</a>
-        </li>
-    {% empty %}
-        <li>No data this month.</li>
-    {% endfor %}
-</ul>
+        <!-- date_list-ek HILABETEAK ditu hemen -->
+        {% for day_date in date_list %}
+            <li>
+                <a href="{% url 'django_cs_archive:day' year=month|date:'Y' month=month|date:'m' day=day_date|date:'d' %}">
+                    {{ day_date|date:"d" }} <!-- Urtarrila, Otsaila... -->
+                </a>
+            </li>
+        {% empty %}
+            <li>No data this year.</li>
+        {% endfor %}
+    </ul>
+    <div class="archive-nav">
+        <a href="{% url 'django_cs_archive:year' year=month|date:'Y' %}">Yearly view</a>
+    </div>
 {% endblock %}

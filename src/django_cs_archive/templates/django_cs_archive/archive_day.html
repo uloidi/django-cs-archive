@@ -17,7 +17,7 @@
     </div>
 
     <div class="archive-nav">
-        <a href="{% url 'cs_archive:month' year=day|date:'Y' month=day|date:'m' %}">Monthly view</a>
+        <a href="{% url 'django_cs_archive:month' year=day|date:'Y' month=day|date:'m' %}">Monthly view</a>
     </div>
 </div>
 {% endblock %}
