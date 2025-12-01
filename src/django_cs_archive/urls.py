@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (
     ArchiveMainView, ArchiveYearView, ArchiveMonthView, 
-    ArchiveDayView
+    ArchiveDayView, ArchiveTodayView, ArchiveThisWeekView
 )
 
 app_name = 'django_cs_archive'
@@ -17,4 +17,8 @@ urlpatterns = [
     path('<int:year>/<int:month>/', ArchiveMonthView.as_view(), name='month'),
     
     path('<int:year>/<int:month>/<int:day>/', ArchiveDayView.as_view(), name='day'),
+
+    path('today/', ArchiveTodayView.as_view(), name='today'),
+    
+    path('this-week/', ArchiveThisWeekView.as_view(), name='this_week'),
 ]

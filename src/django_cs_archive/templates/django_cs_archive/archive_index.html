@@ -6,6 +6,8 @@
 
 <ul>
     <!-- date_list-ek urteak ditu hemen -->
+     <a href="{% url 'django_cs_archive:today'%}">Today</a>
+     <a href="{% url 'django_cs_archive:this_week'%}">This week</a>
     {% for year_date in date_list %}
         <li>
             <a href="{% url 'django_cs_archive:year' year=year_date|date:'Y' %}">
