@@ -3,13 +3,13 @@
 
 {% block content %}
 <h1>{% trans "Archive" %}</h1>
+<ul class="archive-title-list">
+    <li><h2><a href="{% url 'django_cs_archive:today' %}">{% trans "Today" %}</a></h2></li>
 
-    <h2><a href="{% url 'django_cs_archive:today' %}">{% trans "Today" %}</a></h2>
-
-    <h2><a href="{% url 'django_cs_archive:this_week' %}">{% trans "This week" %}</a></h2>
+    <li><h2><a href="{% url 'django_cs_archive:this_week' %}">{% trans "This week" %}</a></h2></li>
         
-
-<ul>
+</ul>
+<ul class="archive-year-list">
     <p>{% trans "Select a year:" %}</p>
     {% for year_date in date_list %}
         <li>
