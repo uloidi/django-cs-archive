@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <div class="archive-day">
-    <h1>This week</h1>
+    <h1>{% trans "This week" %}</h1>
 
     <div class="archive-list">
         <ul>
@@ -11,13 +12,13 @@
                     <a href="{{ object.get_absolute_url }}">{{ object }}</a>
                 </li>
             {% empty %}
-                <li>No data for this day.</li>
+                <li>{% trans "No data for this day." %}</li>
             {% endfor %}
         </ul>
     </div>
 
     <div class="archive-nav">
-        <a href="{% url 'django_cs_archive:index' %}">Archive</a>
+        <a href="{% url 'django_cs_archive:index' %}">{% trans "Archive" %}</a>
     </div>
 </div>
 {% endblock %}

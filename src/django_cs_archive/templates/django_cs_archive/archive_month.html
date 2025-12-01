@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
 <h1>{{ month|date:"F Y" }}</h1>
@@ -12,10 +13,10 @@
                 </a>
             </li>
         {% empty %}
-            <li>No data this year.</li>
+            <li>{% trans "No data this year." %}</li>
         {% endfor %}
     </ul>
     <div class="archive-nav">
-        <a href="{% url 'django_cs_archive:year' year=month|date:'Y' %}">Yearly view</a>
+        <a href="{% url 'django_cs_archive:year' year=month|date:'Y' %}">{% trans "Yearly view" %}</a>
     </div>
 {% endblock %}

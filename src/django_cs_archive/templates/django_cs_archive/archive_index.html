@@ -1,17 +1,16 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
-<h1>Archive</h1>
-<p>Select a year:</p>
+<h1>{% trans "Archive" %}</h1>
+
+    <h2><a href="{% url 'django_cs_archive:today' %}">{% trans "Today" %}</a></h2>
+
+    <h2><a href="{% url 'django_cs_archive:this_week' %}">{% trans "This week" %}</a></h2>
+        
 
 <ul>
-    <li>
-        <a href="{% url 'django_cs_archive:today' %}">Today</a>
-    </li>
-    <li>
-        <a href="{% url 'django_cs_archive:this_week' %}">This week</a>
-    </li>
-
+    <p>{% trans "Select a year:" %}</p>
     {% for year_date in date_list %}
         <li>
             <a href="{% url 'django_cs_archive:year' year=year_date|date:'Y' %}">
@@ -19,7 +18,7 @@
             </a>
         </li>
     {% empty %}
-        <li>No data in the archive.</li>
+        <li>{% trans "No data in the archive." %}</li>
     {% endfor %}
 </ul>
 {% endblock %}
