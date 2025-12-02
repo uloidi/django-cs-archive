@@ -3,7 +3,9 @@
 
 {% block content %}
 <div class="archive-day">
-    <h1>{{ day|date:"F d, Y" }}</h1>
+    <h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
+
+    <h2>{{ day|date:"F d, Y" }}</h2>
 
     <div class="archive-list">
         <ul>

@@ -2,7 +2,16 @@
 {% load i18n %}
 
 {% block content %}
-<h1>{% blocktrans %}{{ year|date:"Y" }} Archive{% endblocktrans %}</h1>
+<style>
+.month-list ul {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    list-style-type: none;
+    padding-left: 0;
+}
+</style>
+<h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
+<h2>{{ year|date:"Y" }} </h2>
 <p>{% trans "Select month:" %}</p>
 
 <div class="month-list">
