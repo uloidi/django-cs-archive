@@ -3,9 +3,7 @@
 
 {% block content %}
 <div class="archive-day">
-    <h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
-
-    <h2>{{ day|date:"F d, Y" }}</h2>
+    <h1>{% trans "Today" %}</h1>
 
     <div class="archive-list">
         <ul>
@@ -20,7 +18,7 @@
     </div>
 
     <div class="archive-nav">
-        <a href="{% url 'django_cs_archive:month' year=day|date:'Y' month=day|date:'m' %}">{% trans "Monthly view" %}</a>
+        <a href="{% url 'django_cs_archive:index' %}">{% trans "Archive" %}</a>
     </div>
 </div>
 {% endblock %}

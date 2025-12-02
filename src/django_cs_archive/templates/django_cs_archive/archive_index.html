@@ -1,11 +1,24 @@
 {% extends "base.html" %}
+{% load i18n %}
 
 {% block content %}
-<h1>Archive</h1>
-<p>Select a year:</p>
+<style>
+.archive-title-list, .archive-year-list {
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+}
 
-<ul>
-    <!-- date_list-ek urteak ditu hemen -->
+</style>
+<h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;"></a>{%trans 'Archive'%}</h1>
+<ul class="archive-title-list">
+    <li><h2><a href="{% url 'django_cs_archive:today' %}">{% trans "Today" %}</a></h2></li>
+
+    <li><h2><a href="{% url 'django_cs_archive:this_week' %}">{% trans "This week" %}</a></h2></li>
+        
+</ul>
+<p>{% trans "Select a year:" %}</p>
+<ul class="archive-year-list">
+    
     {% for year_date in date_list %}
         <li>
             <a href="{% url 'django_cs_archive:year' year=year_date|date:'Y' %}">
@@ -13,7 +26,7 @@
             </a>
         </li>
     {% empty %}
-        <li>No data in the archive.</li>
+        <li>{% trans "No data in the archive." %}</li>
     {% endfor %}
 </ul>
 {% endblock %}

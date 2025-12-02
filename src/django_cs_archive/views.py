@@ -1,9 +1,9 @@
 from django.views.generic.dates import (
     ArchiveIndexView, YearArchiveView, MonthArchiveView, 
-    DayArchiveView, DateDetailView
+    DayArchiveView, DateDetailView, TodayArchiveView
 )
 from .utils import get_archive_model, get_date_field
-
+from django.utils import timezone
 class DynamicArchiveMixin:
     make_object_list = True
     allow_future = False
@@ -32,3 +32,28 @@ class ArchiveMonthView(DynamicArchiveMixin, MonthArchiveView):
 
 class ArchiveDayView(DynamicArchiveMixin, DayArchiveView):
     template_name = "django_cs_archive/archive_day.html"
+
+class ArchiveTodayView(DynamicArchiveMixin, TodayArchiveView):
+    template_name = "django_cs_archive/archive_today.html"
+    allow_empty = True
+
+class ArchiveThisWeekView(DynamicArchiveMixin, ArchiveIndexView):
+    template_name = "django_cs_archive/archive_this_week.html"
+    date_list_period = 'week'
+    def get_queryset(self):
+        # Lehenik Mixin-eko queryset-a lortu
+        qs = super().get_queryset()
+        
+        # Datak kalkulatu
+        today = timezone.now().date()
+        start_of_week = today - timezone.timedelta(days=today.weekday())
+        end_of_week = start_of_week + timezone.timedelta(days=6)
+        
+        date_field = self.get_date_field()
+        
+        # Hemen iragazten dugu QuerySet-a ZUZENEAN
+        filter_kwargs = {
+            f"{date_field}__date__gte": start_of_week,
+            f"{date_field}__date__lte": end_of_week,
+        }
+        return qs.filter(**filter_kwargs)
