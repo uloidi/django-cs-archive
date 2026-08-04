@@ -74,18 +74,15 @@ class Article(models.Model):
     content = models.TextField()
 
     def get_absolute_url(self):
-        # Generate the URL using django-cs-archive namespace
-        return reverse('django_cs_archive:detail', kwargs={
-            'year': self.pub_date.year,
-            'month': self.pub_date.strftime('%m'),
-            'day': self.pub_date.strftime('%d'),
+        # Generate the URL 
+        return reverse('detail', kwargs={
             'slug': self.slug,
         })
 ```
 
 ## Usage
 
-Once configured, the following URLs will be automatically available (assuming you used the `news/` prefix):
+Once configured, the following URLs will be automatically available (assuming you used the `archive/` prefix):
 
 * `/archive/` -> The year list.
 * `/archive/2024/` -> All months with articles from 2024.

@@ -9,6 +9,10 @@
     list-style: none;
     padding-left: 0;
 }
+.day-list li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
 </style>
 <h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
 <h2>{{ month|date:"F Y" }} </h2>

@@ -2,6 +2,16 @@
 {% load i18n %}
 
 {% block content %}
+<style>
+.archive-list ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+.archive-list ul li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+</style>
 <div class="archive-day">
     <h1>{% trans "Today" %}</h1>
 

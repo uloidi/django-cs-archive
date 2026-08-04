@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (
     ArchiveMainView, ArchiveYearView, ArchiveMonthView, 
-    ArchiveDayView, ArchiveTodayView, ArchiveThisWeekView
+    ArchiveDayView, ArchiveTodayView, ArchiveThisWeekView,
+    ArchiveYesterdayView, ArchiveLastWeekView
 )
 
 app_name = 'django_cs_archive'
@@ -12,7 +13,11 @@ urlpatterns = [
     
     path('today/', ArchiveTodayView.as_view(), name='today'),
     
+    path('yesterday/', ArchiveYesterdayView.as_view(), name='yesterday'),
+    
     path('this-week/', ArchiveThisWeekView.as_view(), name='this_week'),
+    
+    path('last-week/', ArchiveLastWeekView.as_view(), name='last_week'),
 
     # 2. Urtea: Hilabeteen zerrenda (/archive/2025/)
     path('<int:year>/', ArchiveYearView.as_view(), name='year'),
