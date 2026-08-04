@@ -96,7 +96,9 @@ class ArchiveThisWeekView(DynamicArchiveMixin, ArchiveIndexView):
     make_object_list = True
 
     def get_date_list(self, queryset, date_type=None, ordering="ASC"):
-        return []
+        # Django-ren barne-logikak date_list hutsik badago queryset.none() bueltatzen du
+        # bista honetan, beraz gaurko eguna bueltatuko dugu datu-basea ez kargatzeko.
+        return [timezone.now().date()]
 
     def get_queryset(self):
         # Lehenik Mixin-eko queryset-a lortu
@@ -109,11 +111,19 @@ class ArchiveThisWeekView(DynamicArchiveMixin, ArchiveIndexView):
 
         date_field = self.get_date_field()
 
-        # Hemen iragazten dugu QuerySet-a ZUZENEAN
-        filter_kwargs = {
-            f"{date_field}__date__gte": start_of_week,
-            f"{date_field}__date__lte": end_of_week,
-        }
+        # Egiaztatu eremua DateTimeField edo DateField den
+        field = qs.model._meta.get_field(date_field)
+        from django.db.models import DateTimeField
+        if isinstance(field, DateTimeField):
+            filter_kwargs = {
+                f"{date_field}__date__gte": start_of_week,
+                f"{date_field}__date__lte": end_of_week,
+            }
+        else:
+            filter_kwargs = {
+                f"{date_field}__gte": start_of_week,
+                f"{date_field}__lte": end_of_week,
+            }
         return qs.filter(**filter_kwargs)
 
 
@@ -123,15 +133,25 @@ class ArchiveYesterdayView(DynamicArchiveMixin, ArchiveIndexView):
     make_object_list = True
 
     def get_date_list(self, queryset, date_type=None, ordering="ASC"):
-        return []
+        yesterday = timezone.now().date() - timezone.timedelta(days=1)
+        return [yesterday]
 
     def get_queryset(self):
         qs = super().get_queryset()
         yesterday = timezone.now().date() - timezone.timedelta(days=1)
         date_field = self.get_date_field()
-        filter_kwargs = {
-            f"{date_field}__date": yesterday,
-        }
+
+        # Egiaztatu eremua DateTimeField edo DateField den
+        field = qs.model._meta.get_field(date_field)
+        from django.db.models import DateTimeField
+        if isinstance(field, DateTimeField):
+            filter_kwargs = {
+                f"{date_field}__date": yesterday,
+            }
+        else:
+            filter_kwargs = {
+                f"{date_field}": yesterday,
+            }
         return qs.filter(**filter_kwargs)
 
 
@@ -141,7 +161,10 @@ class ArchiveLastWeekView(DynamicArchiveMixin, ArchiveIndexView):
     make_object_list = True
 
     def get_date_list(self, queryset, date_type=None, ordering="ASC"):
-        return []
+        today = timezone.now().date()
+        start_of_this_week = today - timezone.timedelta(days=today.weekday())
+        start_of_last_week = start_of_this_week - timezone.timedelta(days=7)
+        return [start_of_last_week]
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -152,8 +175,17 @@ class ArchiveLastWeekView(DynamicArchiveMixin, ArchiveIndexView):
 
         date_field = self.get_date_field()
 
-        filter_kwargs = {
-            f"{date_field}__date__gte": start_of_last_week,
-            f"{date_field}__date__lte": end_of_last_week,
-        }
+        # Egiaztatu eremua DateTimeField edo DateField den
+        field = qs.model._meta.get_field(date_field)
+        from django.db.models import DateTimeField
+        if isinstance(field, DateTimeField):
+            filter_kwargs = {
+                f"{date_field}__date__gte": start_of_last_week,
+                f"{date_field}__date__lte": end_of_last_week,
+            }
+        else:
+            filter_kwargs = {
+                f"{date_field}__gte": start_of_last_week,
+                f"{date_field}__lte": end_of_last_week,
+            }
         return qs.filter(**filter_kwargs)
