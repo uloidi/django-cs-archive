@@ -6,17 +6,24 @@
 .archive-title-list, .archive-year-list {
     display: grid;
     grid-template-columns: repeat(5,1fr);
+    list-style-type: none;
+    padding: 0;
 }
-
+.archive-year-list li {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
 </style>
-<h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;"></a>{%trans 'Archive'%}</h1>
+<h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
+<hr>
 <ul class="archive-title-list">
-    <li><h2><a href="{% url 'django_cs_archive:today' %}">{% trans "Today" %}</a></h2></li>
-
-    <li><h2><a href="{% url 'django_cs_archive:this_week' %}">{% trans "This week" %}</a></h2></li>
-        
+    <li><p class="h4"><a href="{% url 'django_cs_archive:today' %}">{% trans "Today" %}</a></p></li>
+    <li><p class="h4"><a href="{% url 'django_cs_archive:yesterday' %}">{% trans "Yesterday" %}</a></p></li>
+    <li><p class="h4"><a href="{% url 'django_cs_archive:this_week' %}">{% trans "This week" %}</a></p></li>
+    <li><p class="h4"><a href="{% url 'django_cs_archive:last_week' %}">{% trans "Last week" %}</a></p></li>
 </ul>
-<p>{% trans "Select a year:" %}</p>
+<hr>
+<h2>{% trans "Select a year:" %}</h2>
 <ul class="archive-year-list">
     
     {% for year_date in date_list %}
