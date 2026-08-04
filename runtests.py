@@ -1,5 +1,9 @@
 import os
 import sys
+
+# Gehitu src direktorioa Python bidera (sys.path) paketea kargatu ahal izateko
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), 'src')))
+
 import django
 from django.conf import settings
 
