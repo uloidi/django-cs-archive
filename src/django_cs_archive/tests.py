@@ -135,3 +135,31 @@ class ArchiveViewsTestCase(TestCase):
     def test_archive_url_mixin(self):
         expected_url = f"/archive/{self.now.year}/{self.now.strftime('%m')}/{self.now.strftime('%d')}/gaurko-artikulu/"
         self.assertEqual(self.today_article.get_absolute_url(), expected_url)
+
+    def test_translation_loading(self):
+        from django.utils import translation
+        from django.utils.translation import gettext as _
+        
+        # Test default is English when translation is not overridden (or overridden to None)
+        with translation.override(None):
+            self.assertEqual(_("CS Archive"), "CS Archive")
+            self.assertEqual(_("CS_ARCHIVE_MODEL must be set in settings.py."), "CS_ARCHIVE_MODEL must be set in settings.py.")
+            self.assertEqual(_("Could not find model: {model_string}").format(model_string="foo"), "Could not find model: foo")
+
+        # Override with English (en)
+        with translation.override('en'):
+            self.assertEqual(_("CS Archive"), "CS Archive")
+            self.assertEqual(_("CS_ARCHIVE_MODEL must be set in settings.py."), "CS_ARCHIVE_MODEL must be set in settings.py.")
+            self.assertEqual(_("Could not find model: {model_string}").format(model_string="foo"), "Could not find model: foo")
+
+        # Now override with Basque (eu)
+        with translation.override('eu'):
+            self.assertEqual(_("CS Archive"), "CS Artxiboa")
+            self.assertEqual(_("CS_ARCHIVE_MODEL must be set in settings.py."), "CS_ARCHIVE_MODEL ezarri behar da settings.py fitxategian.")
+            self.assertEqual(_("Could not find model: {model_string}").format(model_string="foo"), "Ezin da aurkitu eredua: foo")
+
+        # Override with Spanish (es)
+        with translation.override('es'):
+            self.assertEqual(_("CS Archive"), "Archivo CS")
+            self.assertEqual(_("CS_ARCHIVE_MODEL must be set in settings.py."), "CS_ARCHIVE_MODEL debe estar configurado en settings.py.")
+            self.assertEqual(_("Could not find model: {model_string}").format(model_string="foo"), "No se pudo encontrar el modelo: foo")

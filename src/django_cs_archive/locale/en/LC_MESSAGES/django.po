@@ -12,7 +12,7 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,7 +28,7 @@ msgstr ""
 #: templates/django_cs_archive/archive_year.html:32
 #: templates/django_cs_archive/archive_yesterday.html:21
 msgid "Archive"
-msgstr "Archivo"
+msgstr "Archive"
 
 #: templates/django_cs_archive/archive_day.html:17
 #: templates/django_cs_archive/archive_last_week.html:15
@@ -36,58 +36,58 @@ msgstr "Archivo"
 #: templates/django_cs_archive/archive_today.html:15
 #: templates/django_cs_archive/archive_yesterday.html:15
 msgid "No data for this day."
-msgstr "No hay datos para este día."
+msgstr "No data for this day."
 
 #: templates/django_cs_archive/archive_day.html:23
 msgid "Monthly view"
-msgstr "Vista mensual"
+msgstr "Monthly view"
 
 #: templates/django_cs_archive/archive_index.html:20
 #: templates/django_cs_archive/archive_today.html:6
 msgid "Today"
-msgstr "Hoy"
+msgstr "Today"
 
 #: templates/django_cs_archive/archive_index.html:21
 #: templates/django_cs_archive/archive_yesterday.html:6
 msgid "Yesterday"
-msgstr "Ayer"
+msgstr "Yesterday"
 
 #: templates/django_cs_archive/archive_index.html:22
 #: templates/django_cs_archive/archive_this_week.html:6
 msgid "This week"
-msgstr "Esta semana"
+msgstr "This week"
 
 #: templates/django_cs_archive/archive_index.html:23
 #: templates/django_cs_archive/archive_last_week.html:6
 msgid "Last week"
-msgstr "La semana pasada"
+msgstr "Last week"
 
 #: templates/django_cs_archive/archive_index.html:26
 msgid "Select a year:"
-msgstr "Seleccione un año:"
+msgstr "Select a year:"
 
 #: templates/django_cs_archive/archive_index.html:36
 msgid "No data in the archive."
-msgstr "No hay datos en el archivo."
+msgstr "No data in the archive."
 
 #: templates/django_cs_archive/archive_month.html:25
 #: templates/django_cs_archive/archive_year.html:27
 msgid "No data this year."
-msgstr "No hay datos este año."
+msgstr "No data this year."
 
 #: templates/django_cs_archive/archive_month.html:29
 msgid "Yearly view"
-msgstr "Vista anual"
+msgstr "Yearly view"
 
 #: templates/django_cs_archive/archive_year.html:15
 msgid "Select month:"
-msgstr "Seleccione mes:"
+msgstr "Select month:"
 
 msgid "CS Archive"
-msgstr "Archivo CS"
+msgstr "CS Archive"
 
 msgid "CS_ARCHIVE_MODEL must be set in settings.py."
-msgstr "CS_ARCHIVE_MODEL debe estar configurado en settings.py."
+msgstr "CS_ARCHIVE_MODEL must be set in settings.py."
 
 msgid "Could not find model: {model_string}"
-msgstr "No se pudo encontrar el modelo: {model_string}"
+msgstr "Could not find model: {model_string}"
