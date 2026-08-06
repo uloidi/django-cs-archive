@@ -82,3 +82,12 @@ msgstr "Urteko bista"
 #: templates/django_cs_archive/archive_year.html:15
 msgid "Select month:"
 msgstr "Hautatu hilabetea:"
+
+msgid "CS Archive"
+msgstr "CS Artxiboa"
+
+msgid "CS_ARCHIVE_MODEL must be set in settings.py."
+msgstr "CS_ARCHIVE_MODEL ezarri behar da settings.py fitxategian."
+
+msgid "Could not find model: {model_string}"
+msgstr "Ezin da aurkitu eredua: {model_string}"
