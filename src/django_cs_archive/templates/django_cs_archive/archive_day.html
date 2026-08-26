@@ -12,10 +12,11 @@
     padding: 10px 0;
 }
 </style>
-<div class="archive-day">
-    <h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
-
-    <h2>{{ day|date:"F d, Y" }}</h2>
+    <div class="archive-day">
+        <h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
+        <div class="archive-nav">
+        <h2><a href="{% url 'django_cs_archive:year' year=day|date:'Y' %}">{{ day|date:"Y" }}</a> > <a href="{% url 'django_cs_archive:month' year=day|date:'Y' month=day|date:'m' %}">{{ day|date:"m" }}</a> > <a href="{% url 'django_cs_archive:day' year=day|date:'Y' month=day|date:'m' day=day|date:'d' %}">{{ day|date:"d" }}</a></h2>
+    </div>
 
     <div class="archive-list">
         <ul>
@@ -27,10 +28,6 @@
                 <li>{% trans "No data for this day." %}</li>
             {% endfor %}
         </ul>
-    </div>
-
-    <div class="archive-nav">
-        <a href="{% url 'django_cs_archive:month' year=day|date:'Y' month=day|date:'m' %}">{% trans "Monthly view" %}</a>
     </div>
 </div>
 {% endblock %}
