@@ -7,7 +7,7 @@
     </h1>
     <div class="archive-nav">
         <h2>
-            <a href="{% url 'django_cs_archive:year' year=month|date:'Y' %}">{{ month|date:"Y" }}</a> > <a href="{% url 'django_cs_archive:month' year=month|date:'Y' month=month|date:'m' %}">{{ month|date:"m" }}</a>
+            <a href="{% url 'django_cs_archive:year' year=month|date:'Y' %}">{{ month|date:"Y" }}</a> » <a href="{% url 'django_cs_archive:month' year=month|date:'Y' month=month|date:'m' %}">{{ month|date:"m" }}</a>
         </h2>
     </div>
     <ul class="day-list">
