@@ -15,17 +15,15 @@
 }
 </style>
 <h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
-<hr>
 <ul class="archive-title-list">
     <li><p class="h4"><a href="{% url 'django_cs_archive:today' %}">{% trans "Today" %}</a></p></li>
     <li><p class="h4"><a href="{% url 'django_cs_archive:yesterday' %}">{% trans "Yesterday" %}</a></p></li>
     <li><p class="h4"><a href="{% url 'django_cs_archive:this_week' %}">{% trans "This week" %}</a></p></li>
     <li><p class="h4"><a href="{% url 'django_cs_archive:last_week' %}">{% trans "Last week" %}</a></p></li>
 </ul>
-<hr>
 <h2>{% trans "Select a year:" %}</h2>
 <ul class="archive-year-list">
-    
+
     {% for year_date in date_list %}
         <li>
             <a href="{% url 'django_cs_archive:year' year=year_date|date:'Y' %}">

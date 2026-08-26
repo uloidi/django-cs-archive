@@ -15,8 +15,9 @@
 }
 </style>
 <h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
-<h2>{{ year|date:"Y" }} </h2>
-<p>{% trans "Select month:" %}</p>
+<div class="archive-nav">
+    <h2><a href="{% url 'django_cs_archive:year' year=year|date:'Y' %}">{{ year|date:"Y" }}</a></h2>
+</div>
 
 <div class="month-list">
     <ul>
@@ -24,7 +25,7 @@
         {% for month_date in date_list %}
             <li>
                 <a href="{% url 'django_cs_archive:month' year=year|date:'Y' month=month_date|date:'m' %}">
-                    {{ month_date|date:"F" }} <!-- Urtarrila, Otsaila... -->
+                    {{ month_date|date:"F"|capfirst }} <!-- Urtarrila, Otsaila... -->
                 </a>
             </li>
         {% empty %}
@@ -32,7 +33,4 @@
         {% endfor %}
     </ul>
 </div>
-<div class="archive-nav">
-        <a href="{% url 'django_cs_archive:index'  %}">{% trans "Archive" %}</a>
-    </div>
 {% endblock %}

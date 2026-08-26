@@ -15,7 +15,9 @@
 }
 </style>
 <h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
-<h2>{{ month|date:"F Y" }} </h2>
+<div class="archive-nav">
+    <h2><a href="{% url 'django_cs_archive:year' year=month|date:'Y' %}">{{ month|date:"Y" }}</a> > <a href="{% url 'django_cs_archive:month' year=month|date:'Y' month=month|date:'m' %}">{{ month|date:"m" }}</a></h2>
+</div>
 
 <ul class="day-list">
         <!-- date_list-ek HILABETEAK ditu hemen -->
@@ -29,7 +31,4 @@
             <li>{% trans "No data this year." %}</li>
         {% endfor %}
     </ul>
-    <div class="archive-nav">
-        <a href="{% url 'django_cs_archive:year' year=month|date:'Y' %}">{% trans "Yearly view" %}</a>
-    </div>
 {% endblock %}

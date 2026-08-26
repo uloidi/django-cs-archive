@@ -14,6 +14,9 @@
 </style>
 <div class="archive-day">
     <h1>{% trans "Last week" %}</h1>
+    <div class="archive-nav">
+        <h2><a href="{% url 'django_cs_archive:index' %}">{% trans "Archive" %}</a></h2>
+    </div>
 
     <div class="archive-list">
         <ul>
@@ -25,10 +28,6 @@
                 <li>{% trans "No data for this day." %}</li>
             {% endfor %}
         </ul>
-    </div>
-
-    <div class="archive-nav">
-        <a href="{% url 'django_cs_archive:index' %}">{% trans "Archive" %}</a>
     </div>
 </div>
 {% endblock %}
