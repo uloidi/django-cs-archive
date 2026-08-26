@@ -1,33 +1,23 @@
 {% extends "base.html" %}
 {% load i18n %}
-
 {% block content %}
-<style>
-.archive-list ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-.archive-list ul li {
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
-}
-</style>
-<div class="archive-day">
-    <h1>{% trans "Last week" %}</h1>
-    <div class="archive-nav">
-        <h2><a href="{% url 'django_cs_archive:index' %}">{% trans "Archive" %}</a></h2>
+    <div class="archive-day">
+        <h1>{% trans "Last week" %}</h1>
+        <div class="archive-nav">
+            <h2>
+                <a href="{% url 'django_cs_archive:index' %}">{% trans "Archive" %}</a>
+            </h2>
+        </div>
+        <div class="archive-list">
+            <ul>
+                {% for object in object_list %}
+                    <li>
+                        <a href="{{ object.get_absolute_url }}">{{ object }}</a>
+                    </li>
+                {% empty %}
+                    <li>{% trans "No data for this day." %}</li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
-
-    <div class="archive-list">
-        <ul>
-            {% for object in object_list %}
-                <li>
-                    <a href="{{ object.get_absolute_url }}">{{ object }}</a>
-                </li>
-            {% empty %}
-                <li>{% trans "No data for this day." %}</li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
 {% endblock %}
