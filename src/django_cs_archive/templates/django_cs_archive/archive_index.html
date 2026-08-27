@@ -1,37 +1,40 @@
 {% extends "base.html" %}
 {% load i18n %}
-
 {% block content %}
-<style>
-.archive-title-list, .archive-year-list {
-    display: grid;
-    grid-template-columns: repeat(5,1fr);
-    list-style-type: none;
-    padding: 0;
-}
-.archive-year-list li {
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
-}
-</style>
-<h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
-<ul class="archive-title-list">
-    <li><p class="h4"><a href="{% url 'django_cs_archive:today' %}">{% trans "Today" %}</a></p></li>
-    <li><p class="h4"><a href="{% url 'django_cs_archive:yesterday' %}">{% trans "Yesterday" %}</a></p></li>
-    <li><p class="h4"><a href="{% url 'django_cs_archive:this_week' %}">{% trans "This week" %}</a></p></li>
-    <li><p class="h4"><a href="{% url 'django_cs_archive:last_week' %}">{% trans "Last week" %}</a></p></li>
-</ul>
-<h2>{% trans "Select a year:" %}</h2>
-<ul class="archive-year-list">
-
-    {% for year_date in date_list %}
+    <h1>
+        <a href="{% url 'django_cs_archive:index' %}"
+           style="text-decoration: none">{% trans 'Archive' %}</a>
+    </h1>
+    <ul class="archive-title-list">
         <li>
-            <a href="{% url 'django_cs_archive:year' year=year_date|date:'Y' %}">
-                {{ year_date|date:"Y" }}
-            </a>
+            <p class="h4">
+                <a href="{% url 'django_cs_archive:today' %}">{% trans "Today" %}</a>
+            </p>
         </li>
-    {% empty %}
-        <li>{% trans "No data in the archive." %}</li>
-    {% endfor %}
-</ul>
+        <li>
+            <p class="h4">
+                <a href="{% url 'django_cs_archive:yesterday' %}">{% trans "Yesterday" %}</a>
+            </p>
+        </li>
+        <li>
+            <p class="h4">
+                <a href="{% url 'django_cs_archive:this_week' %}">{% trans "This week" %}</a>
+            </p>
+        </li>
+        <li>
+            <p class="h4">
+                <a href="{% url 'django_cs_archive:last_week' %}">{% trans "Last week" %}</a>
+            </p>
+        </li>
+    </ul>
+    <h2>{% trans "Select a year:" %}</h2>
+    <ul class="archive-year-list">
+        {% for year_date in date_list %}
+            <li>
+                <a href="{% url 'django_cs_archive:year' year=year_date|date:'Y' %}">{{ year_date|date:"Y" }}</a>
+            </li>
+        {% empty %}
+            <li>{% trans "No data in the archive." %}</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

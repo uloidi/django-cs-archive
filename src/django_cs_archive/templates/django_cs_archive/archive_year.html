@@ -1,26 +1,16 @@
 {% extends "base.html" %}
 {% load i18n %}
-
 {% block content %}
-<style>
-.month-list ul {
-    display: grid;
-    grid-template-columns: repeat(4,1fr);
-    list-style-type: none;
-    padding-left: 0;
-}
-.month-list ul li {
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
-}
-</style>
-<h1><a href="{% url 'django_cs_archive:index'%}" style="text-decoration: none;">{%trans 'Archive'%}</a></h1>
-<div class="archive-nav">
-    <h2><a href="{% url 'django_cs_archive:year' year=year|date:'Y' %}">{{ year|date:"Y" }}</a></h2>
-</div>
-
-<div class="month-list">
-    <ul>
+    <h1>
+        <a href="{% url 'django_cs_archive:index' %}"
+           style="text-decoration: none">{% trans 'Archive' %}</a>
+    </h1>
+    <div class="archive-nav">
+        <h2>
+            <a href="{% url 'django_cs_archive:year' year=year|date:'Y' %}">{{ year|date:"Y" }}</a>
+        </h2>
+    </div>
+    <ul class="month-list">
         <!-- date_list-ek HILABETEAK ditu hemen -->
         {% for month_date in date_list %}
             <li>
@@ -32,5 +22,4 @@
             <li>{% trans "No data this year." %}</li>
         {% endfor %}
     </ul>
-</div>
 {% endblock %}
