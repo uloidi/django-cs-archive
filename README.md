@@ -40,6 +40,15 @@ CS_ARCHIVE_MODEL = 'blog.Article'
 # OPTIONAL: The name of the date/datetime field in your model
 # Defaults to 'publish_date' if not set.
 CS_ARCHIVE_DATE_FIELD = 'pub_date'
+
+# OPTIONAL: Filters to apply to the model queryset.
+# Specified as a Python dictionary (or a JSON string representing a dictionary).
+CS_ARCHIVE_FILTERS = {
+    'status': 'published',
+    'is_public': True,
+}
+# Or as a JSON string:
+# CS_ARCHIVE_FILTERS = '{"status": "published", "is_public": true}'
 ```
 
 ### 2. `urls.py`
