@@ -91,3 +91,9 @@ msgstr "CS_ARCHIVE_MODEL ezarri behar da settings.py fitxategian."
 
 msgid "Could not find model: {model_string}"
 msgstr "Ezin da aurkitu eredua: {model_string}"
+
+msgid "CS_ARCHIVE_FILTERS contains an invalid JSON string."
+msgstr "CS_ARCHIVE_FILTERS-(e)k JSON kate baliogabea dauka."
+
+msgid "CS_ARCHIVE_FILTERS must be a dictionary or a valid JSON string."
+msgstr "CS_ARCHIVE_FILTERS hiztegi bat (dict) edo baliozko JSON kate bat izan behar da."

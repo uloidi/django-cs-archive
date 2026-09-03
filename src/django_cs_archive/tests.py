@@ -1,10 +1,12 @@
 import datetime
-from django.test import TestCase, Client
+from django.test import TestCase, Client, override_settings
 from django.utils import timezone
 from django.urls import reverse, path, include
 from django.db import models
 from django.core.cache import cache
+from django.core.exceptions import ImproperlyConfigured
 from django_cs_archive.models import ArchiveUrlMixin
+from django_cs_archive.utils import get_archive_filters
 
 class TestArticle(ArchiveUrlMixin, models.Model):
     title = models.CharField(max_length=100)
@@ -135,6 +137,34 @@ class ArchiveViewsTestCase(TestCase):
     def test_archive_url_mixin(self):
         expected_url = f"/archive/{self.now.year}/{self.now.strftime('%m')}/{self.now.strftime('%d')}/gaurko-artikulu/"
         self.assertEqual(self.today_article.get_absolute_url(), expected_url)
+
+    @override_settings(CS_ARCHIVE_FILTERS={'title': 'Gaurko Artikulu'})
+    def test_archive_filters_dict(self):
+        filters = get_archive_filters()
+        self.assertEqual(filters, {'title': 'Gaurko Artikulu'})
+        url = reverse('django_cs_archive:today')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(list(response.context['object_list']), [self.today_article])
+
+    @override_settings(CS_ARCHIVE_FILTERS='{"title": "Atzoko Artikulu"}')
+    def test_archive_filters_json_string(self):
+        filters = get_archive_filters()
+        self.assertEqual(filters, {'title': 'Atzoko Artikulu'})
+        url = reverse('django_cs_archive:yesterday')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(list(response.context['object_list']), [self.yesterday_article])
+
+    @override_settings(CS_ARCHIVE_FILTERS='{invalid json}')
+    def test_archive_filters_invalid_json(self):
+        with self.assertRaises(ImproperlyConfigured):
+            get_archive_filters()
+
+    @override_settings(CS_ARCHIVE_FILTERS=123)
+    def test_archive_filters_invalid_type(self):
+        with self.assertRaises(ImproperlyConfigured):
+            get_archive_filters()
 
     def test_translation_loading(self):
         from django.utils import translation

@@ -6,7 +6,7 @@ from django.views.generic.dates import (
     DateDetailView,
     TodayArchiveView,
 )
-from .utils import get_archive_model, get_date_field
+from .utils import get_archive_model, get_date_field, get_archive_filters
 from django.utils import timezone
 from django.core.cache import cache
 
@@ -18,6 +18,9 @@ class DynamicArchiveMixin:
 
     def get_queryset(self):
         model = get_archive_model()
+        filters = get_archive_filters()
+        if filters:
+            return model.objects.filter(**filters)
         return model.objects.all()
 
     def get_date_field(self):

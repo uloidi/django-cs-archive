@@ -91,3 +91,9 @@ msgstr "CS_ARCHIVE_MODEL debe estar configurado en settings.py."
 
 msgid "Could not find model: {model_string}"
 msgstr "No se pudo encontrar el modelo: {model_string}"
+
+msgid "CS_ARCHIVE_FILTERS contains an invalid JSON string."
+msgstr "CS_ARCHIVE_FILTERS contiene una cadena JSON no válida."
+
+msgid "CS_ARCHIVE_FILTERS must be a dictionary or a valid JSON string."
+msgstr "CS_ARCHIVE_FILTERS debe ser un diccionario o una cadena JSON válida."
