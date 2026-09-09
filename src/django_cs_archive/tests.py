@@ -156,6 +156,16 @@ class ArchiveViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(list(response.context['object_list']), [self.yesterday_article])
 
+    @override_settings(CS_ARCHIVE_FILTERS={'title': lambda: 'Gaurko Artikulu'})
+    def test_archive_filters_callable_value(self):
+        filters = get_archive_filters()
+        self.assertEqual(filters, {'title': 'Gaurko Artikulu'})
+
+    @override_settings(CS_ARCHIVE_FILTERS=lambda: {'title': 'Atzoko Artikulu'})
+    def test_archive_filters_callable_function(self):
+        filters = get_archive_filters()
+        self.assertEqual(filters, {'title': 'Atzoko Artikulu'})
+
     @override_settings(CS_ARCHIVE_FILTERS='{invalid json}')
     def test_archive_filters_invalid_json(self):
         with self.assertRaises(ImproperlyConfigured):

@@ -23,11 +23,19 @@ def get_archive_filters():
     filters = getattr(settings, 'CS_ARCHIVE_FILTERS', None)
     if filters is None:
         return {}
+    if callable(filters):
+        filters = filters()
     if isinstance(filters, str):
         try:
             filters = json.loads(filters)
         except json.JSONDecodeError:
             raise ImproperlyConfigured(_("CS_ARCHIVE_FILTERS contains an invalid JSON string."))
     if isinstance(filters, dict):
-        return filters
-    raise ImproperlyConfigured(_("CS_ARCHIVE_FILTERS must be a dictionary or a valid JSON string."))
+        resolved_filters = {}
+        for key, value in filters.items():
+            if callable(value):
+                resolved_filters[key] = value()
+            else:
+                resolved_filters[key] = value
+        return resolved_filters
+    raise ImproperlyConfigured(_("CS_ARCHIVE_FILTERS must be a dictionary, callable, or a valid JSON string."))
