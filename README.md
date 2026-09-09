@@ -43,9 +43,11 @@ CS_ARCHIVE_DATE_FIELD = 'pub_date'
 
 # OPTIONAL: Filters to apply to the model queryset.
 # Specified as a Python dictionary (or a JSON string representing a dictionary).
+# Values can also be callables for dynamic evaluation (e.g. settings.SITE_ID).
 CS_ARCHIVE_FILTERS = {
     'status': 'published',
     'is_public': True,
+    'sites': lambda: settings.SITE_ID,
 }
 # Or as a JSON string:
 # CS_ARCHIVE_FILTERS = '{"status": "published", "is_public": true}'
